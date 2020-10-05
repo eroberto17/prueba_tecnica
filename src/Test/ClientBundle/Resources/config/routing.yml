@@ -1,0 +1,48 @@
+test_client_homepage:
+    path:     /
+    defaults: { _controller: TestClientBundle:Default:index }
+
+test_client_index:
+    path:     /client
+    defaults: { _controller: TestClientBundle:Client:index }
+
+test_client_add:
+    path:     /client/add
+    defaults: { _controller: TestClientBundle:Client:add }
+
+test_client_create:
+    path:     /client/create
+    defaults: { _controller: TestClientBundle:Client:create }
+    methods: POST
+
+test_client_edit:
+    path:     /client/edit/{id}
+    defaults: { _controller: TestClientBundle:Client:edit }
+
+test_client_update:
+    path:     /client/update/{id}
+    defaults: { _controller: TestClientBundle:Client:update }
+    methods: [POST, PUT]
+
+test_client_view:
+    path:     /client/view/{id}
+    defaults: { _controller: TestClientBundle:Client:view }
+
+test_client_delete:
+    path:     /client/delete/{id}
+    defaults: { _controller: TestClientBundle:Client:delete }
+    methods: [POST, DELETE]
+
+test_client_redirect_add:
+    path:     /client/create
+    defaults:
+      _controller: TestClientBundle:Client:add
+      path: /client/add
+      permanent: true
+
+test_client_redirect_edit:
+    path:     /client/update/{id}
+    defaults:
+      _controller: TestClientBundle:Client:edit
+      path: /client/edit/{id}
+      permanent: true

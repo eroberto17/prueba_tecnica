@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ parent() }}
+<div class="container">
+	<div class="col-md-12">
+		<div class="page-header margin-none">
+				<h2 class="padding-none">{% trans %} Clientes {% endtrans %}</h2>
+		</div>
+		<div class="table-responsive">
+			Registros totales: <span id="total">{{ pagination.getTotalItemCount }}</span>
+
+			<form method="get" action="" class="form-inline" role="search">
+					<div class="form-group">
+						<input type="text" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar" required />
+					</div>
+					<input type="submit" value="Buscar" class="btn btn-default">
+				</form>
+				<br>
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>{{ knp_pagination_sortable(pagination, 'Nombre', 'c.name') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Apellido', 'c.lastName') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Email', 'c.email') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Grupo Cliente', '') }}</th>
+					<th>Acción</th>
+				</tr>
+
+				{% for client in pagination %}
+
+					<tr data-id="{{ client.id }}">
+						<td>{{ client.name }}</td>
+						<td>{{ client.lastname }}</td>
+						<td>{{ client.email }}</td>
+						<td>{% for groupclient in client.groupclient %} |{{ groupclient }}| {% endfor %}</td>
+						<td> 
+							<a href="{{ path('test_client_view', {id:client.id} ) }}" class="btn btn-sm btn-info">Ver</a>
+							<a href="{{ path('test_client_edit', {id:client.id} ) }}" class="btn btn-sm btn-primary">Editar</a>
+							<a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
+						</td>
+					</tr>
+
+				{% endfor %}
+			</table>
+
+			{# display navigation #}
+			<div class="navigation">
+				{{ knp_pagination_render(pagination) }}
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{{ include('TestClientBundle:Client:forms/form.html.twig', { form: delete_form_ajax, id: 'form-delete', with_submit: false}) }}
+
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/testclient/js/delete-user.js') }}"></script>
+{% endblock %}

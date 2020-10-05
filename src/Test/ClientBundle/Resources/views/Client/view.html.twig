@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>{{ client.name }} {{ client.lastName }}</h2>
+	        <br>
+	        <dl>
+	            <dt>Nombre</dt>
+	            <dd>
+	                {{ client.name }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Apellido</dt>
+	            <dd>
+	                {{ client.lastName }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Email</dt>
+	            <dd>
+	                {{ client.email }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Grupo Cliente</dt>
+	            <dd>
+	            	{% for groupclient in client.groupclient %} |{{ groupclient }}| {% endfor %}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Observaciones</dt>
+	            <dd>
+                	{{ client.observation }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Fecha creación</dt>
+	            <dd>
+	                {{ client.createdAt|date('d-m-Y H:i') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>Fecha actualización</dt>
+	            <dd>
+	                {{ client.updatedAt|date('d-m-Y H:i') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	    	<h3>Acciones:</h3>
+			<p>
+		    	<a href="{{ path('test_client_edit', { id: client.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	Editar
+				 </a>
+			</p>
+			<p>
+			   {{ include('TestClientBundle:Client:forms/form.html.twig', { form: delete_form}) }}
+			</p>
+	    </div>
+	</div>
+{% endblock %}

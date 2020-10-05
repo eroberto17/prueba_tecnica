@@ -1,4 +1,4 @@
-# Test Brandlive
+# Test
 
 Evaluación Técnica Desarrollador PHP Symfony 
 
@@ -9,6 +9,7 @@ Base de datos
 ```bash
 php app/console doctrine:schema:update --force
 ```
+Tambié esta el test-symfony.sql con el schema creado.
 
 Paginación
 
